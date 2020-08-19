@@ -15,7 +15,9 @@ func (actor Actor) CreateDeployment(appGUID string, dropletGUID string) (string,
 }
 
 func (actor Actor) CreateDeploymentByApplicationAndRevision(appGUID string, revisionGUID string) (string, Warnings, error) {
-	return revisionGUID, nil, nil
+	deploymentGUID, warnings, _ := actor.CloudControllerClient.CreateApplicationDeploymentByRevision(appGUID, revisionGUID)
+
+	return deploymentGUID, Warnings(warnings), nil
 }
 
 func (actor Actor) GetLatestActiveDeploymentForApp(appGUID string) (Deployment, Warnings, error) {

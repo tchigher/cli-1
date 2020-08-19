@@ -152,6 +152,22 @@ type FakeCloudControllerClient struct {
 		result2 ccv3.Warnings
 		result3 error
 	}
+	CreateApplicationDeploymentByRevisionStub        func(string, string) (string, ccv3.Warnings, error)
+	createApplicationDeploymentByRevisionMutex       sync.RWMutex
+	createApplicationDeploymentByRevisionArgsForCall []struct {
+		arg1 string
+		arg2 string
+	}
+	createApplicationDeploymentByRevisionReturns struct {
+		result1 string
+		result2 ccv3.Warnings
+		result3 error
+	}
+	createApplicationDeploymentByRevisionReturnsOnCall map[int]struct {
+		result1 string
+		result2 ccv3.Warnings
+		result3 error
+	}
 	CreateApplicationProcessScaleStub        func(string, ccv3.Process) (ccv3.Process, ccv3.Warnings, error)
 	createApplicationProcessScaleMutex       sync.RWMutex
 	createApplicationProcessScaleArgsForCall []struct {
@@ -2983,6 +2999,73 @@ func (fake *FakeCloudControllerClient) CreateApplicationDeploymentReturnsOnCall(
 		})
 	}
 	fake.createApplicationDeploymentReturnsOnCall[i] = struct {
+		result1 string
+		result2 ccv3.Warnings
+		result3 error
+	}{result1, result2, result3}
+}
+
+func (fake *FakeCloudControllerClient) CreateApplicationDeploymentByRevision(arg1 string, arg2 string) (string, ccv3.Warnings, error) {
+	fake.createApplicationDeploymentByRevisionMutex.Lock()
+	ret, specificReturn := fake.createApplicationDeploymentByRevisionReturnsOnCall[len(fake.createApplicationDeploymentByRevisionArgsForCall)]
+	fake.createApplicationDeploymentByRevisionArgsForCall = append(fake.createApplicationDeploymentByRevisionArgsForCall, struct {
+		arg1 string
+		arg2 string
+	}{arg1, arg2})
+	fake.recordInvocation("CreateApplicationDeploymentByRevision", []interface{}{arg1, arg2})
+	fake.createApplicationDeploymentByRevisionMutex.Unlock()
+	if fake.CreateApplicationDeploymentByRevisionStub != nil {
+		return fake.CreateApplicationDeploymentByRevisionStub(arg1, arg2)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2, ret.result3
+	}
+	fakeReturns := fake.createApplicationDeploymentByRevisionReturns
+	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
+}
+
+func (fake *FakeCloudControllerClient) CreateApplicationDeploymentByRevisionCallCount() int {
+	fake.createApplicationDeploymentByRevisionMutex.RLock()
+	defer fake.createApplicationDeploymentByRevisionMutex.RUnlock()
+	return len(fake.createApplicationDeploymentByRevisionArgsForCall)
+}
+
+func (fake *FakeCloudControllerClient) CreateApplicationDeploymentByRevisionCalls(stub func(string, string) (string, ccv3.Warnings, error)) {
+	fake.createApplicationDeploymentByRevisionMutex.Lock()
+	defer fake.createApplicationDeploymentByRevisionMutex.Unlock()
+	fake.CreateApplicationDeploymentByRevisionStub = stub
+}
+
+func (fake *FakeCloudControllerClient) CreateApplicationDeploymentByRevisionArgsForCall(i int) (string, string) {
+	fake.createApplicationDeploymentByRevisionMutex.RLock()
+	defer fake.createApplicationDeploymentByRevisionMutex.RUnlock()
+	argsForCall := fake.createApplicationDeploymentByRevisionArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
+}
+
+func (fake *FakeCloudControllerClient) CreateApplicationDeploymentByRevisionReturns(result1 string, result2 ccv3.Warnings, result3 error) {
+	fake.createApplicationDeploymentByRevisionMutex.Lock()
+	defer fake.createApplicationDeploymentByRevisionMutex.Unlock()
+	fake.CreateApplicationDeploymentByRevisionStub = nil
+	fake.createApplicationDeploymentByRevisionReturns = struct {
+		result1 string
+		result2 ccv3.Warnings
+		result3 error
+	}{result1, result2, result3}
+}
+
+func (fake *FakeCloudControllerClient) CreateApplicationDeploymentByRevisionReturnsOnCall(i int, result1 string, result2 ccv3.Warnings, result3 error) {
+	fake.createApplicationDeploymentByRevisionMutex.Lock()
+	defer fake.createApplicationDeploymentByRevisionMutex.Unlock()
+	fake.CreateApplicationDeploymentByRevisionStub = nil
+	if fake.createApplicationDeploymentByRevisionReturnsOnCall == nil {
+		fake.createApplicationDeploymentByRevisionReturnsOnCall = make(map[int]struct {
+			result1 string
+			result2 ccv3.Warnings
+			result3 error
+		})
+	}
+	fake.createApplicationDeploymentByRevisionReturnsOnCall[i] = struct {
 		result1 string
 		result2 ccv3.Warnings
 		result3 error
@@ -12673,6 +12756,8 @@ func (fake *FakeCloudControllerClient) Invocations() map[string][][]interface{} 
 	defer fake.createApplicationMutex.RUnlock()
 	fake.createApplicationDeploymentMutex.RLock()
 	defer fake.createApplicationDeploymentMutex.RUnlock()
+	fake.createApplicationDeploymentByRevisionMutex.RLock()
+	defer fake.createApplicationDeploymentByRevisionMutex.RUnlock()
 	fake.createApplicationProcessScaleMutex.RLock()
 	defer fake.createApplicationProcessScaleMutex.RUnlock()
 	fake.createApplicationTaskMutex.RLock()

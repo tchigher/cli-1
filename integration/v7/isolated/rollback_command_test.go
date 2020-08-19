@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
-	. "code.cloudfoundry.org/cli/cf/util/testhelpers/matchers"
 	"code.cloudfoundry.org/cli/integration/helpers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -75,7 +74,7 @@ applications:
 					Eventually(session).Should(Say(`OK`))
 					Eventually(session).Should(Exit(0))
 					session = helpers.CF("revisions", appName)
-					Eventually(session).Should(Say(`^3\s+[\w\-]+\s+New droplet deployed.`))
+					Eventually(session).Should(Say(`3\s+[\w\-]+\s+New droplet deployed.`))
 					Eventually(session).Should(Exit(0))
 				})
 			})

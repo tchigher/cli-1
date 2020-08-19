@@ -22,6 +22,7 @@ type CloudControllerClient interface {
 	CopyPackage(sourcePackageGUID string, targetAppGUID string) (ccv3.Package, ccv3.Warnings, error)
 	CreateApplication(app resources.Application) (resources.Application, ccv3.Warnings, error)
 	CreateApplicationDeployment(appGUID string, dropletGUID string) (string, ccv3.Warnings, error)
+	CreateApplicationDeploymentByRevision(appGUID string, revisionGUID string) (string, ccv3.Warnings, error)
 	CreateApplicationProcessScale(appGUID string, process ccv3.Process) (ccv3.Process, ccv3.Warnings, error)
 	CreateApplicationTask(appGUID string, task ccv3.Task) (ccv3.Task, ccv3.Warnings, error)
 	CreateBuild(build ccv3.Build) (ccv3.Build, ccv3.Warnings, error)
