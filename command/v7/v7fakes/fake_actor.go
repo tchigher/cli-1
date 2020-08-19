@@ -246,6 +246,22 @@ type FakeActor struct {
 		result2 v7action.Warnings
 		result3 error
 	}
+	CreateDeploymentByApplicationAndRevisionStub        func(string, string) (string, v7action.Warnings, error)
+	createDeploymentByApplicationAndRevisionMutex       sync.RWMutex
+	createDeploymentByApplicationAndRevisionArgsForCall []struct {
+		arg1 string
+		arg2 string
+	}
+	createDeploymentByApplicationAndRevisionReturns struct {
+		result1 string
+		result2 v7action.Warnings
+		result3 error
+	}
+	createDeploymentByApplicationAndRevisionReturnsOnCall map[int]struct {
+		result1 string
+		result2 v7action.Warnings
+		result3 error
+	}
 	CreateDockerPackageByApplicationStub        func(string, v7action.DockerImageCredentials) (v7action.Package, v7action.Warnings, error)
 	createDockerPackageByApplicationMutex       sync.RWMutex
 	createDockerPackageByApplicationArgsForCall []struct {
@@ -1513,6 +1529,22 @@ type FakeActor struct {
 	}
 	getRecentLogsForApplicationByNameAndSpaceReturnsOnCall map[int]struct {
 		result1 []sharedaction.LogMessage
+		result2 v7action.Warnings
+		result3 error
+	}
+	GetRevisionByApplicationAndVersionStub        func(string, int) (ccv3.Revision, v7action.Warnings, error)
+	getRevisionByApplicationAndVersionMutex       sync.RWMutex
+	getRevisionByApplicationAndVersionArgsForCall []struct {
+		arg1 string
+		arg2 int
+	}
+	getRevisionByApplicationAndVersionReturns struct {
+		result1 ccv3.Revision
+		result2 v7action.Warnings
+		result3 error
+	}
+	getRevisionByApplicationAndVersionReturnsOnCall map[int]struct {
+		result1 ccv3.Revision
 		result2 v7action.Warnings
 		result3 error
 	}
@@ -4045,6 +4077,73 @@ func (fake *FakeActor) CreateDeploymentReturnsOnCall(i int, result1 string, resu
 		})
 	}
 	fake.createDeploymentReturnsOnCall[i] = struct {
+		result1 string
+		result2 v7action.Warnings
+		result3 error
+	}{result1, result2, result3}
+}
+
+func (fake *FakeActor) CreateDeploymentByApplicationAndRevision(arg1 string, arg2 string) (string, v7action.Warnings, error) {
+	fake.createDeploymentByApplicationAndRevisionMutex.Lock()
+	ret, specificReturn := fake.createDeploymentByApplicationAndRevisionReturnsOnCall[len(fake.createDeploymentByApplicationAndRevisionArgsForCall)]
+	fake.createDeploymentByApplicationAndRevisionArgsForCall = append(fake.createDeploymentByApplicationAndRevisionArgsForCall, struct {
+		arg1 string
+		arg2 string
+	}{arg1, arg2})
+	fake.recordInvocation("CreateDeploymentByApplicationAndRevision", []interface{}{arg1, arg2})
+	fake.createDeploymentByApplicationAndRevisionMutex.Unlock()
+	if fake.CreateDeploymentByApplicationAndRevisionStub != nil {
+		return fake.CreateDeploymentByApplicationAndRevisionStub(arg1, arg2)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2, ret.result3
+	}
+	fakeReturns := fake.createDeploymentByApplicationAndRevisionReturns
+	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
+}
+
+func (fake *FakeActor) CreateDeploymentByApplicationAndRevisionCallCount() int {
+	fake.createDeploymentByApplicationAndRevisionMutex.RLock()
+	defer fake.createDeploymentByApplicationAndRevisionMutex.RUnlock()
+	return len(fake.createDeploymentByApplicationAndRevisionArgsForCall)
+}
+
+func (fake *FakeActor) CreateDeploymentByApplicationAndRevisionCalls(stub func(string, string) (string, v7action.Warnings, error)) {
+	fake.createDeploymentByApplicationAndRevisionMutex.Lock()
+	defer fake.createDeploymentByApplicationAndRevisionMutex.Unlock()
+	fake.CreateDeploymentByApplicationAndRevisionStub = stub
+}
+
+func (fake *FakeActor) CreateDeploymentByApplicationAndRevisionArgsForCall(i int) (string, string) {
+	fake.createDeploymentByApplicationAndRevisionMutex.RLock()
+	defer fake.createDeploymentByApplicationAndRevisionMutex.RUnlock()
+	argsForCall := fake.createDeploymentByApplicationAndRevisionArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
+}
+
+func (fake *FakeActor) CreateDeploymentByApplicationAndRevisionReturns(result1 string, result2 v7action.Warnings, result3 error) {
+	fake.createDeploymentByApplicationAndRevisionMutex.Lock()
+	defer fake.createDeploymentByApplicationAndRevisionMutex.Unlock()
+	fake.CreateDeploymentByApplicationAndRevisionStub = nil
+	fake.createDeploymentByApplicationAndRevisionReturns = struct {
+		result1 string
+		result2 v7action.Warnings
+		result3 error
+	}{result1, result2, result3}
+}
+
+func (fake *FakeActor) CreateDeploymentByApplicationAndRevisionReturnsOnCall(i int, result1 string, result2 v7action.Warnings, result3 error) {
+	fake.createDeploymentByApplicationAndRevisionMutex.Lock()
+	defer fake.createDeploymentByApplicationAndRevisionMutex.Unlock()
+	fake.CreateDeploymentByApplicationAndRevisionStub = nil
+	if fake.createDeploymentByApplicationAndRevisionReturnsOnCall == nil {
+		fake.createDeploymentByApplicationAndRevisionReturnsOnCall = make(map[int]struct {
+			result1 string
+			result2 v7action.Warnings
+			result3 error
+		})
+	}
+	fake.createDeploymentByApplicationAndRevisionReturnsOnCall[i] = struct {
 		result1 string
 		result2 v7action.Warnings
 		result3 error
@@ -9526,6 +9625,73 @@ func (fake *FakeActor) GetRecentLogsForApplicationByNameAndSpaceReturnsOnCall(i 
 	}
 	fake.getRecentLogsForApplicationByNameAndSpaceReturnsOnCall[i] = struct {
 		result1 []sharedaction.LogMessage
+		result2 v7action.Warnings
+		result3 error
+	}{result1, result2, result3}
+}
+
+func (fake *FakeActor) GetRevisionByApplicationAndVersion(arg1 string, arg2 int) (ccv3.Revision, v7action.Warnings, error) {
+	fake.getRevisionByApplicationAndVersionMutex.Lock()
+	ret, specificReturn := fake.getRevisionByApplicationAndVersionReturnsOnCall[len(fake.getRevisionByApplicationAndVersionArgsForCall)]
+	fake.getRevisionByApplicationAndVersionArgsForCall = append(fake.getRevisionByApplicationAndVersionArgsForCall, struct {
+		arg1 string
+		arg2 int
+	}{arg1, arg2})
+	fake.recordInvocation("GetRevisionByApplicationAndVersion", []interface{}{arg1, arg2})
+	fake.getRevisionByApplicationAndVersionMutex.Unlock()
+	if fake.GetRevisionByApplicationAndVersionStub != nil {
+		return fake.GetRevisionByApplicationAndVersionStub(arg1, arg2)
+	}
+	if specificReturn {
+		return ret.result1, ret.result2, ret.result3
+	}
+	fakeReturns := fake.getRevisionByApplicationAndVersionReturns
+	return fakeReturns.result1, fakeReturns.result2, fakeReturns.result3
+}
+
+func (fake *FakeActor) GetRevisionByApplicationAndVersionCallCount() int {
+	fake.getRevisionByApplicationAndVersionMutex.RLock()
+	defer fake.getRevisionByApplicationAndVersionMutex.RUnlock()
+	return len(fake.getRevisionByApplicationAndVersionArgsForCall)
+}
+
+func (fake *FakeActor) GetRevisionByApplicationAndVersionCalls(stub func(string, int) (ccv3.Revision, v7action.Warnings, error)) {
+	fake.getRevisionByApplicationAndVersionMutex.Lock()
+	defer fake.getRevisionByApplicationAndVersionMutex.Unlock()
+	fake.GetRevisionByApplicationAndVersionStub = stub
+}
+
+func (fake *FakeActor) GetRevisionByApplicationAndVersionArgsForCall(i int) (string, int) {
+	fake.getRevisionByApplicationAndVersionMutex.RLock()
+	defer fake.getRevisionByApplicationAndVersionMutex.RUnlock()
+	argsForCall := fake.getRevisionByApplicationAndVersionArgsForCall[i]
+	return argsForCall.arg1, argsForCall.arg2
+}
+
+func (fake *FakeActor) GetRevisionByApplicationAndVersionReturns(result1 ccv3.Revision, result2 v7action.Warnings, result3 error) {
+	fake.getRevisionByApplicationAndVersionMutex.Lock()
+	defer fake.getRevisionByApplicationAndVersionMutex.Unlock()
+	fake.GetRevisionByApplicationAndVersionStub = nil
+	fake.getRevisionByApplicationAndVersionReturns = struct {
+		result1 ccv3.Revision
+		result2 v7action.Warnings
+		result3 error
+	}{result1, result2, result3}
+}
+
+func (fake *FakeActor) GetRevisionByApplicationAndVersionReturnsOnCall(i int, result1 ccv3.Revision, result2 v7action.Warnings, result3 error) {
+	fake.getRevisionByApplicationAndVersionMutex.Lock()
+	defer fake.getRevisionByApplicationAndVersionMutex.Unlock()
+	fake.GetRevisionByApplicationAndVersionStub = nil
+	if fake.getRevisionByApplicationAndVersionReturnsOnCall == nil {
+		fake.getRevisionByApplicationAndVersionReturnsOnCall = make(map[int]struct {
+			result1 ccv3.Revision
+			result2 v7action.Warnings
+			result3 error
+		})
+	}
+	fake.getRevisionByApplicationAndVersionReturnsOnCall[i] = struct {
+		result1 ccv3.Revision
 		result2 v7action.Warnings
 		result3 error
 	}{result1, result2, result3}
@@ -16221,6 +16387,8 @@ func (fake *FakeActor) Invocations() map[string][][]interface{} {
 	defer fake.createBuildpackMutex.RUnlock()
 	fake.createDeploymentMutex.RLock()
 	defer fake.createDeploymentMutex.RUnlock()
+	fake.createDeploymentByApplicationAndRevisionMutex.RLock()
+	defer fake.createDeploymentByApplicationAndRevisionMutex.RUnlock()
 	fake.createDockerPackageByApplicationMutex.RLock()
 	defer fake.createDockerPackageByApplicationMutex.RUnlock()
 	fake.createDockerPackageByApplicationNameAndSpaceMutex.RLock()
@@ -16389,6 +16557,8 @@ func (fake *FakeActor) Invocations() map[string][][]interface{} {
 	defer fake.getRecentEventsByApplicationNameAndSpaceMutex.RUnlock()
 	fake.getRecentLogsForApplicationByNameAndSpaceMutex.RLock()
 	defer fake.getRecentLogsForApplicationByNameAndSpaceMutex.RUnlock()
+	fake.getRevisionByApplicationAndVersionMutex.RLock()
+	defer fake.getRevisionByApplicationAndVersionMutex.RUnlock()
 	fake.getRevisionsByApplicationNameAndSpaceMutex.RLock()
 	defer fake.getRevisionsByApplicationNameAndSpaceMutex.RUnlock()
 	fake.getRouteByAttributesMutex.RLock()

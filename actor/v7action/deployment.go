@@ -14,6 +14,10 @@ func (actor Actor) CreateDeployment(appGUID string, dropletGUID string) (string,
 	return deploymentGUID, Warnings(warnings), err
 }
 
+func (actor Actor) CreateDeploymentByApplicationAndRevision(appGUID string, revisionGUID string) (string, Warnings, error) {
+	return revisionGUID, nil, nil
+}
+
 func (actor Actor) GetLatestActiveDeploymentForApp(appGUID string) (Deployment, Warnings, error) {
 	ccDeployments, warnings, err := actor.CloudControllerClient.GetDeployments(
 		ccv3.Query{Key: ccv3.AppGUIDFilter, Values: []string{appGUID}},

@@ -17,3 +17,9 @@ func (actor *Actor) GetRevisionsByApplicationNameAndSpace(appName string, spaceG
 
 	return revisions, warnings, apiErr
 }
+
+// GetRevGetRevisionByApplicationAndVersion fetches a specific revision from an
+// applications list of revisions
+func (actor Actor) GetRevisionByApplicationAndVersion(appGUID string, revisionVersion int) (ccv3.Revision, Warnings, error) {
+	return ccv3.Revision{}, nil, nil
+}

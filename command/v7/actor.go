@@ -34,7 +34,9 @@ type Actor interface {
 	CreateApplicationInSpace(app resources.Application, spaceGUID string) (resources.Application, v7action.Warnings, error)
 	CreateBitsPackageByApplication(appGUID string) (v7action.Package, v7action.Warnings, error)
 	CreateBuildpack(buildpack v7action.Buildpack) (v7action.Buildpack, v7action.Warnings, error)
+	// TODO: #173183973 change this to CreateDeploymentByApplicationAndDroplet
 	CreateDeployment(appGUID string, dropletGUID string) (string, v7action.Warnings, error)
+	CreateDeploymentByApplicationAndRevision(appGUID string, revisionGUID string) (string, v7action.Warnings, error)
 	CreateDockerPackageByApplication(appGUID string, dockerImageCredentials v7action.DockerImageCredentials) (v7action.Package, v7action.Warnings, error)
 	CreateDockerPackageByApplicationNameAndSpace(appName string, spaceGUID string, dockerImageCredentials v7action.DockerImageCredentials) (v7action.Package, v7action.Warnings, error)
 	CreateIsolationSegmentByName(isolationSegment v7action.IsolationSegment) (v7action.Warnings, error)
@@ -119,6 +121,8 @@ type Actor interface {
 	GetRawApplicationManifestByNameAndSpace(appName string, spaceGUID string) ([]byte, v7action.Warnings, error)
 	GetRecentEventsByApplicationNameAndSpace(appName string, spaceGUID string) ([]v7action.Event, v7action.Warnings, error)
 	GetRecentLogsForApplicationByNameAndSpace(appName string, spaceGUID string, client sharedaction.LogCacheClient) ([]sharedaction.LogMessage, v7action.Warnings, error)
+	// TODO: #173183973 Change return type from ccv3.Revision to resources.Revision
+	GetRevisionByApplicationAndVersion(appGUID string, revisionVersion int) (ccv3.Revision, v7action.Warnings, error)
 	GetRevisionsByApplicationNameAndSpace(appName string, spaceGUID string) (v7action.Revisions, v7action.Warnings, error)
 	GetRouteByAttributes(domain resources.Domain, hostname string, path string, port int) (resources.Route, v7action.Warnings, error)
 	GetRouteDestinationByAppGUID(route resources.Route, appGUID string) (resources.RouteDestination, error)
